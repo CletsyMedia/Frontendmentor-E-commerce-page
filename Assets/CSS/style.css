@@ -1,0 +1,953 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+
+    --orange: hsl(26, 100%, 55%);
+    --paleOrange: hsl(25, 100%, 94%);
+
+    --veryDarkBlue: hsl(220, 13%, 13%);
+    --darkGrayishBlue: hsl(219, 9%, 45%);
+    --grayishBlue: hsl(220, 14%, 75%);
+    --lightGrayishBlue: hsl(223, 64%, 98%);
+    --white: hsl(0, 0%, 100%);
+    --black: hsl(0, 0%, 0%);
+
+    --mainFont: 'Kumbh Sans', sans-serif;
+
+    font-family: var(--mainFont);
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--white);
+    position: relative;
+}
+
+body a{
+    text-decoration: none;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 4rem;
+    font-size: 1.5rem;
+}
+
+footer a {
+    margin-left: .5rem;
+}
+
+/* MainPage */
+
+.mainPage{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 10rem 1fr;
+}
+
+main{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Header */
+
+header {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: .1rem solid hsla(217, 9%, 45%, 0.174);
+}
+
+.logoNavWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-left: 12rem;
+    height: 100%;
+}
+
+.menuModalBlur{
+    position: absolute;
+    opacity: 0.5;
+    background-color: rgba(0, 0, 0, 0);
+    width: 100%;
+    height: 100vh;
+    z-index: 10000;
+    visibility: hidden;
+    transition-duration: 400ms;
+    transition-property: background-color;
+    transition-timing-function: ease-in-out;
+}
+
+.burguerButton{
+    cursor: pointer;
+    visibility: hidden;
+    margin-right: 1rem;
+}
+
+.burguerButton img{
+    height: 1.8rem;
+}
+
+.hideMenuModalButton{
+    width: 80%;
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 2.2rem;
+    color: var(--darkGrayishBlue);
+    visibility: hidden;
+}
+
+.hideMenuModalImg{
+    cursor: pointer;
+    height: 1.7rem;
+    padding: 0.5rem;
+    margin-left: -0.5rem;
+    box-sizing: content-box;
+}
+
+.headerNavbar{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbarList{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    margin-left: 4rem;
+    font-size: 1.4rem;
+    height: 100%;
+}
+
+.navbarListItem{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-bottom: 4px solid transparent;
+    transition-duration: 300ms;
+    transition-property: border;
+}
+
+.navbarList a{
+    color: var(--darkGrayishBlue);
+}
+
+.navbarListItem:hover{
+    border-bottom: 4px solid var(--orange);
+}
+
+.userAccess{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    margin-right: 12rem;
+}
+
+.userAccess > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.userProfile{
+    height: 4rem;
+    width: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.userProfile img{
+    height: 4rem;
+    border-radius: 50%;
+    transition-duration: 80ms;
+    transition-property: border;
+    box-sizing: content-box;
+}
+
+.userCart{
+    position: relative;
+}
+
+.userCartLink{
+    text-decoration: none;
+    cursor: auto;
+}
+
+.userCart img{
+    height: 2rem;
+    transition-duration: 200ms;
+    transition-property: filter;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.cartItemsCounter{
+    color: var(--white);
+    height:15px;
+    width:15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    background-color: var(--orange);
+    border-radius: 2.5rem;
+    position: absolute;
+    right: -.7rem;
+    top: -.45rem;
+    z-index: 2;
+    transition: transform .3s;
+    transition-duration: 200ms;
+    transition-property: background-color, height, width;
+    visibility: hidden;
+}
+
+.userCart:hover .cartItemsCounter{
+    transform: scale(1.1);
+}
+
+.userCart:hover .cartIcon{
+    filter: brightness(0);
+}
+
+.userProfile img:hover{
+    border: 3px solid var(--orange);
+}
+
+/* Cart Modal */
+
+.userCart:hover .cartProductsModal{
+    visibility: visible;
+}
+
+.cartProductsModal:hover{
+    visibility: visible;
+}
+
+.cartProductsModal{
+    visibility: hidden;
+    position: absolute;
+    width: 32rem;
+    height: 21rem;
+    background-color: var(--white);
+    box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.150);
+    top: 5rem;
+    left: -14.5rem;
+    padding: 2rem 2rem;
+    border-radius: .5rem;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.cartTitle{
+    font-size: 1.5rem;
+    display: block;
+    width: 100%;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.150);
+    margin-bottom: 2rem;
+}
+
+.productInCart{
+    width: 100%;
+    height: 10.6rem;
+    visibility: hidden;
+}
+
+.productInCartInfo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.productInCartInfo .classeTeste{
+    height: 5rem;
+    border-radius: .4rem;
+}
+
+.purchaseDetails{
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 4rem;
+}
+
+.productInCartTitle{
+    font-size: 1.35rem;
+}
+
+.productInCartFinalPriceArea{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;
+    margin-right: 1.2rem;
+}
+
+.productInCartQuantity{
+    font-weight: bold;
+}
+
+.finalPrice{
+    color: var(--orange);
+    background-color: hsla(26, 100%, 55%, 0.21);
+    padding: .1rem .4rem;
+    border-radius: .6rem;
+}
+
+.productInCartInfo .deleteProductInCart{
+    height: 1.7rem;
+}
+
+.cartCheckout{
+    background-color: var(--orange);
+    color: var(--white);
+    padding: 1rem 0;
+    width: 100%;
+    border-radius: 1rem;
+    margin-top: 2rem;
+    font-family: var(--mainFont);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cartCheckout:hover{
+    filter: brightness(1.2);
+}
+
+.cartEmpty{
+    width: 100%;
+    height: 10.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.65rem;
+    font-weight: bold;
+    color: var(--darkGrayishBlue)
+}
+
+/* Product Area */
+
+.productArea{
+    width: 80%;
+    height: 80%;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    justify-content: center;
+    gap: 12rem;
+    margin-top: -5rem;
+}
+
+/* Product Photo Area */
+
+.productPhotos{
+    width: 90%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 80% 20%;
+    justify-self: end;
+}
+
+.mainPhoto{
+    width: 100%;
+    justify-self: center;
+    align-self: center;
+    position: relative;
+    cursor: zoom-in;
+}
+
+.mainImg{
+    width: max(100%, 10rem);
+    border-radius: 1rem;
+    display: block;
+}
+
+.mainImageArrow{
+    position: absolute;
+    background-color: var(--white);
+    top: 50%;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.4rem;
+    font-weight: bold;
+    border-radius: 50%;
+    padding-bottom: .3rem;
+    cursor: pointer;
+    transition-duration: 200ms;
+    transition-property: width, height;
+    visibility: hidden;
+}
+
+.mainImageArrow:hover{
+    width: 4.25rem;
+    height: 4.25rem;
+}
+
+.mainImageLeftArrow{
+    left: 1.5rem;
+}
+
+.mainImageRightArrow{
+    right: 1.5rem;
+}
+
+.photosMenu{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap:1rem;
+    margin: 0 -4px;
+    margin-top:1.5rem;
+}
+
+.photo{
+    cursor: pointer;
+    transition-duration: 200ms;
+    transition-property: background-color;
+    border-radius: 1.5rem;
+    height: auto;
+    width: auto;
+    border: 4px solid transparent;
+    position: relative;
+    transition-duration: 150ms;
+    transition-property: border;
+}
+
+.photoImg{
+    width: 8rem;
+    border-radius: 1rem;
+    display: block;
+}
+
+.hoverFilter{
+    background-color: white;
+    opacity: 0;
+    height: 8rem;
+    width: 8rem;
+    position: absolute;
+    top: 0;
+    border-radius: 1rem;
+    transition-duration: 150ms;
+    transition-property: opacity;
+}
+
+.photo:hover{
+    border: 4px solid var(--orange);
+}
+
+.photo:hover .hoverFilter{
+    opacity: 0.35;
+}
+
+/* Product Info Area */
+
+.productInfo{
+    justify-self: center;
+    align-self: center;
+    width: 70%;
+    justify-self: start;
+}
+
+.companyType{
+    color: var(--orange);
+    letter-spacing: .17rem;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 1.6rem;
+}
+
+.productName{
+    font-size: 4rem;
+    margin-bottom: 3rem;
+}
+
+.productDescription{ 
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    color: var(--darkGrayishBlue);
+    margin-bottom: 2.6rem;
+}
+
+.productPriceArea{
+    width: 100%;
+}
+
+.currentProductPrice{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.6rem;
+    margin-bottom: .8rem;
+}
+
+.productPrice{
+    font-size: 3rem;
+}
+
+.productDiscount{
+    background-color: var(--paleOrange);
+    color: var(--orange);
+    padding: .4rem .6rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-radius: .6rem;
+}
+
+.oldPrice{
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--grayishBlue);
+    text-decoration: line-through;
+    margin-bottom: 5rem;
+    display: block;
+}
+
+/* Shopping Area */
+
+.shoppingArea{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    flex-flow: nowrap row;
+    gap: 5%;
+}
+
+.productQuantityArea{
+    width: 35%;
+    background-color: var(--lightGrayishBlue);
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 1rem;
+}
+
+.modifyAmount{
+    color: var(--orange);
+    font-weight: bold;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0 1.7rem;
+    height: 100%;
+}
+
+.increaseAmount{
+    font-size: 2.4rem;
+}
+
+.decreaseAmount{
+    font-size: 3.3rem;
+}
+
+.productQuantity{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.addToCartButton{
+    width: 60%;
+    background-color: var(--orange);
+    color: var(--paleOrange);
+    font-family: var(--mainFont);
+    font-weight: bold;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    cursor: pointer;
+    box-shadow: 0px 0px 15px 3px hsla(26, 100%, 55%, 0.401);
+    transition-duration: 200ms;
+    transition-property: filter;
+}
+
+.modifyAmount:hover{
+    filter: brightness(1.4);
+}
+
+.addToCartButton:hover{
+    filter: brightness(1.15);
+}
+
+.addToCartButtonIcon{
+    filter: brightness(215%);
+}
+
+/* Responsive - Media Queries */
+
+@media (max-width: 1185px) {
+
+    body{
+        height: auto;
+    }
+
+    footer {
+        position: static;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 4rem;
+        font-size: 1.5rem;
+    }
+
+    footer a{
+        margin-left: .6rem;
+    }
+
+    main{
+        height: 115rem;
+    }
+
+    /* Product Area */
+
+    .productArea{
+        width: 50%;
+        height: 90%;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-top: -5rem;
+    }
+
+    .productPhotos{
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-rows: 100%;
+        justify-self: end;
+    }
+
+    .mainImageArrow{
+        visibility: visible;
+    }
+
+    .photosMenu{
+        visibility: hidden;
+    }
+
+    .productInfo{
+        width: 100%;
+    }
+}
+
+@media (max-width: 1000px) {
+
+    footer{
+        font-size: 1rem;
+        margin-top: 6rem;
+    }
+
+    header{
+        position: relative;
+    }
+
+    .logoNavWrapper{
+        margin-left: 3rem;
+    }
+
+    .userAccess{
+        margin-right: 3rem;
+    }
+
+    .headerNavbar{
+        position: absolute;
+        top: 0;
+        left: -25rem;
+        width: 25rem;
+        height: 100vh;
+        background-color: var(--white);
+        z-index: 10001;
+        flex-direction: column;
+        transition-duration: 400ms;
+        transition-property: left;
+        transition-timing-function: ease-in-out;
+    }
+
+    .navbarList{
+        flex-flow: column nowrap;
+        height: 100%;
+        width: 80%;
+        margin: 0 0 0 0;
+        justify-content: start;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    .navbarListItem{
+        width: auto;
+        height: auto;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding-bottom: 1rem;
+    }
+
+    .navbarListItem a{
+        font-weight: bold;
+        color: black;
+        font-size: 1.7rem;
+    }
+
+    .userCart{
+        position: static;
+    }
+
+    .userCart a{
+        position: relative;
+    }
+
+    .cartProductsModal{
+        width: 80%;
+        height: 22rem;
+        top: 10rem;
+        left: 10%;
+    }
+
+    .productArea{
+        width: 70%;
+    }
+
+    /* Mobile Menu Statement */
+
+    .activeMobileMenu{
+        left: 0;
+    }
+
+    .menuModalBlurActive{
+        visibility: visible;
+        background-color: black;
+    }
+}
+
+@media(max-width:750px){
+
+    .mainPage{
+        grid-template-rows: 7rem 1fr;
+    }
+
+    .burguerButton img{
+        height: 1.5rem;
+        margin-bottom: -.3rem;
+    }
+
+    .logo{
+        height: 1.8rem;
+    }
+
+    main{
+        width: 100%;
+        height: 83rem;
+        align-items: flex-start;
+    }
+
+    .logoNavWrapper{
+        gap: 1rem;
+        margin-left: 1.8rem;
+    }
+
+    .userCart img{
+        height: 1.8rem;
+    }
+
+    .userProfile img{
+        height: 3.2rem;
+    }
+
+    .userAccess{
+        margin-right: 1.8rem;
+        gap: 2rem;
+    }
+
+    .cartProductsModal{
+        width: 90%;
+        top: 10rem;
+        left: 5%;
+    }
+
+    .photosMenu{
+        position: absolute;
+        flex-direction: column;
+    }
+
+    .productArea{
+        width: 100%;
+        margin-top: 0;
+        align-items: flex-start;
+    }
+
+    .burguerButton{
+        visibility: visible;
+    }
+
+    .hideMenuModalButton{
+        visibility: visible;
+    }
+
+    .productName{
+        font-size: 2.6rem;
+        margin-bottom: 2.2rem;
+    }
+
+    .productDescription{
+        font-size: 1.3rem;
+    }
+
+    .productPriceArea{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 3rem;
+    }
+
+    .currentProductPrice{
+        margin-bottom: 0;
+    }
+
+    .oldPrice{
+        margin-bottom: 0;
+    }
+
+    .shoppingArea{
+        flex-flow: column nowrap;
+        align-items: center;
+    }
+
+    .productQuantityArea{
+        width: 95%;
+    }
+
+    .addToCartButton{
+        height: 5rem;
+        width: 95%;
+        margin-top: 2rem;
+    }
+
+    .mainPhoto{
+        align-self: flex-start;
+    }
+
+    .mainImg{
+        border-radius: 0;
+    }
+
+    .productInfo{
+        padding: 0 2rem;
+    }
+
+    footer{
+        margin-top: 35rem;
+    }
+}
+
+@media (max-width: 670px) {
+    footer{
+        margin-top: 25rem;
+    }
+}
+
+@media (max-width: 600px) {
+    footer{
+        margin-top: 17rem;
+    }
+}
+
+@media (max-width: 525px) {
+    footer{
+        margin-top: 8rem;
+    }
+}
+
+@media (max-width: 450px) {
+    footer{
+        margin-top: 0;
+    }
+}
+
+/* Active Statements */
+
+.active{
+    visibility: inherit;
+}
+
+.disabled{
+    visibility: hidden;
+    position: absolute;
+}
+
+.headerNavbarActive{
+    left: 0;
+}
+
+.activeArrowButton{
+    opacity: .5;
+}
+
+.modalBlurImageMenu {
+    z-index: 100000;
+    visibility: visible;
+    background-color: black;
+}
+
+.activeProductPhotos {
+    position: absolute;
+    width: 30%;
+    left: 35%;
+    top: 10%;
+    z-index: 100001;
+}
+
+.activeProductPhotosMobile {
+    position: absolute;
+    width: 95%;
+    left: 2.5%;
+    top: 13%;
+    z-index: 100001;
+}
+
+.activeMainImage{
+    cursor: auto;
+}
+
+.activeStatementBodySize {
+    overflow: hidden;
+}
